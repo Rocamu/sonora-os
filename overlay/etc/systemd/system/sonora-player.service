@@ -1,0 +1,20 @@
+[Unit]
+Description=Sonora direct ALSA USB audio player
+After=sound.target lyrionmusicserver.service sonora-firstboot.service
+Wants=lyrionmusicserver.service
+Requires=sonora-firstboot.service
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/sonoractl player
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/etc/sonora
+CapabilityBoundingSet=CAP_SETUID CAP_SETGID
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+[Install]
+WantedBy=multi-user.target

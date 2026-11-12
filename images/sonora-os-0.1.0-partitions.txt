@@ -1,0 +1,13 @@
+Disk /project/images/sonora-os-0.1.0-amd64.img: 8388608 sectors, 4.0 GiB
+Sector size (logical): 512 bytes
+Disk identifier (GUID): 02F431E5-07CF-4B09-902C-930E94221223
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 8388574
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 2014 sectors (1007.0 KiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            2048            4095   1024.0 KiB  EF02  Sonora BIOS boot
+   2            4096          266239   128.0 MiB   EF00  Sonora EFI
+   3          266240         8388574   3.9 GiB     8300  Sonora system

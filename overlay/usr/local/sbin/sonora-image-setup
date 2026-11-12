@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+getent group squeezeboxserver >/dev/null || groupadd --system squeezeboxserver
+usermod --gid squeezeboxserver squeezeboxserver
+getent passwd sonora-player >/dev/null || useradd --system --no-create-home --home-dir /nonexistent --shell /usr/sbin/nologin --groups audio sonora-player
+install -d -m0755 /etc/sonora /srv/music/local /srv/music/nas /srv/music/usb /opt/sonora/app
+install -d -m0755 -o squeezeboxserver -g squeezeboxserver /var/lib/squeezeboxserver/prefs /var/lib/squeezeboxserver/playlists /var/lib/squeezeboxserver/cache /var/log/squeezeboxserver
+if [ ! -s /var/lib/squeezeboxserver/prefs/server.prefs ]; then
+cat > /var/lib/squeezeboxserver/prefs/server.prefs <<'PREFS'
+---
+audiodir: /srv/music
+language: ES
+libraryname: Sonora
+playlistdir: /var/lib/squeezeboxserver/playlists
+skin: material
+wizardDone: 1
+PREFS
+fi
+chown -R squeezeboxserver:squeezeboxserver /var/lib/squeezeboxserver
+chmod 0755 /usr/local/sbin/sonora-* /usr/local/sbin/sonoractl
+chmod 0644 /usr/local/lib/sonora/control.py
+# No factory credentials or duplicated machine identity in distributable images.
+rm -f /etc/sonora/admin.json /etc/sonora/player.json /etc/sonora/first-access.txt
+systemctl enable sonora-firstboot.service sonora-console.service sonora-player.service sonora-portal.service sonora-plugins.service lyrionmusicserver.service avahi-daemon.service
+systemctl disable squeezelite.service 2>/dev/null || true
+install -d /etc/systemd/journald.conf.d
+printf '[Journal]\nStorage=volatile\nRuntimeMaxUse=64M\n' > /etc/systemd/journald.conf.d/sonora.conf
+# Stop a full-library scan competing with audio unnecessarily on a small CPU.
+install -d /etc/systemd/system/lyrionmusicserver.service.d
+printf '[Service]\nNice=5\n' > /etc/systemd/system/lyrionmusicserver.service.d/priority.conf
+printf 'Sonora OS 0.1 — Linux audio appliance\n\n' > /etc/issue
+udevadm control --reload-rules 2>/dev/null || true

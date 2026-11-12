@@ -1,0 +1,11 @@
+[Unit]
+Description=Sonora initial music-service extensions
+After=network.target sonora-firstboot.service
+Before=lyrionmusicserver.service
+Requires=sonora-firstboot.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sonora-plugins
+TimeoutStartSec=45
+[Install]
+WantedBy=multi-user.target

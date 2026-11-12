@@ -1,0 +1,7 @@
+[Unit]
+Description=Read-only USB music source %I
+After=local-fs.target sonora-firstboot.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sonoractl usb-mount --device /dev/%I
+TimeoutStartSec=45

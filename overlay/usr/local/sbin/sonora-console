@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+from pathlib import Path
+import subprocess
+text=Path('/etc/sonora/first-access.txt').read_text()
+try:text+='\nDirecciones de red: '+subprocess.check_output(['hostname','-I'],text=True,timeout=5).strip()+'\n'
+except Exception:pass
+text+='\nSin pantalla: consulta la IP de «sonora» en tu router.\nConexión por Ethernet recomendada. No hace falta dejar una pantalla conectada.\n'
+for dev in ['/dev/tty1','/dev/ttyS0']:
+    try:
+        with open(dev,'w')as f:f.write('\n'+text+'\n')
+    except OSError:pass

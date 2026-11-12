@@ -1,0 +1,16 @@
+[Unit]
+Description=Sonora appliance administration
+After=network.target sonora-firstboot.service
+Requires=sonora-firstboot.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/sonora/app
+ExecStart=/usr/bin/python3 /opt/sonora/app/server.py --host 0.0.0.0 --port 80
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+[Install]
+WantedBy=multi-user.target

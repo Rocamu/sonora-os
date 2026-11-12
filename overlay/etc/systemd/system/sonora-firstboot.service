@@ -1,0 +1,11 @@
+[Unit]
+Description=Sonora first boot identity and credentials
+After=local-fs.target systemd-random-seed.service
+Before=lyrionmusicserver.service sonora-player.service sonora-portal.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sonoractl firstboot
+RemainAfterExit=yes
+UMask=0077
+[Install]
+WantedBy=multi-user.target

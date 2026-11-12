@@ -1,0 +1,1 @@
+<?xml version="1.0"?><extension><name>Sonora</name><module>Plugins::Sonora::Plugin</module><version>0.1.0</version><targetApplication><id>slimserver</id><minVersion>9.0</minVersion><maxVersion>*</maxVersion></targetApplication><creator>Sonora OS</creator><description>Sonora profile configuration for the local USB player.</description><enforce>true</enforce></extension>

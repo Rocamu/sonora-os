@@ -1,0 +1,10 @@
+[Unit]
+Description=Sonora local first-access screen
+After=sonora-firstboot.service
+Requires=sonora-firstboot.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sonora-console
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target

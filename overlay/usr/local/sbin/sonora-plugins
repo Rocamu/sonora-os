@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+"""Install pinned music-service extensions on this appliance, never ship account data."""
+import hashlib, io, json, os, pathlib, pwd, shutil, stat, tempfile, urllib.request, zipfile
+LOCK=pathlib.Path('/usr/share/sonora/plugins-lock.json')
+DEST=pathlib.Path('/var/lib/squeezeboxserver/cache/InstalledPlugins/Plugins')
+user=pwd.getpwnam('squeezeboxserver')
+DEST.mkdir(parents=True,exist_ok=True)
+for item in json.loads(LOCK.read_text())['plugins']:
+    target=DEST/item['name']
+    if (target/'install.xml').is_file():continue
+    try:
+        with urllib.request.urlopen(item['url'],timeout=15)as response:
+            data=response.read(4_000_001)
+        if len(data)>4_000_000 or hashlib.sha256(data).hexdigest()!=item['sha256']:raise ValueError('integridad')
+        with tempfile.TemporaryDirectory(prefix='.sonora-plugin-',dir=DEST)as temp:
+            staging=pathlib.Path(temp)/item['name'];staging.mkdir()
+            with zipfile.ZipFile(io.BytesIO(data))as archive:
+                total=0
+                for entry in archive.infolist():
+                    rel=pathlib.PurePosixPath(entry.filename)
+                    total+=entry.file_size
+                    if total>16_000_000 or rel.is_absolute()or'..'in rel.parts or'\\'in entry.filename or stat.S_ISLNK(entry.external_attr>>16):raise ValueError('archivo')
+                    out=staging.joinpath(*rel.parts)
+                    if entry.is_dir():out.mkdir(parents=True,exist_ok=True);continue
+                    out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(archive.read(entry));out.chmod(0o644)
+            if not(staging/'install.xml').is_file():raise ValueError('manifiesto')
+            for p in [staging,*staging.rglob('*')]:os.chown(p,user.pw_uid,user.pw_gid)
+            os.replace(staging,target)
+        print(item['name']+' '+item['version']+': instalado desde su distribución oficial.')
+    except Exception:
+        print(item['name']+': pendiente; puede instalarse desde Ajustes > Plugins de Lyrion cuando haya Internet.')
+for p in (DEST,DEST.parent):os.chown(p,user.pw_uid,user.pw_gid)

@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    {
+      "name": "TIDAL",
+      "version": "1.9.0",
+      "url": "https://github.com/michaelherger/lms-plugin-tidal/releases/download/1.9.0/TIDAL.zip",
+      "sha256": "51494563d5cd6b7a86f51f9821f8404eb08ef8ba29a1d7c76544745fcc855e9e"
+    },
+    {
+      "name": "Qobuz",
+      "version": "3.7.3",
+      "url": "https://github.com/LMS-Community/plugin-Qobuz/releases/download/3.7.3/Qobuz.zip",
+      "sha256": "a504e1737509d95df243077b1e4735a6d7db733f663b609dda5e80d0bb657e9b"
+    }
+  ]
+}

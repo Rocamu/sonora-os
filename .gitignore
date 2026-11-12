@@ -1,0 +1,7 @@
+vendor-cache/
+images/*.img
+images/*.img.xz
+__pycache__/
+*.pyc
+work/
+overlay/usr/share/squeezeboxserver/Plugins/MaterialSkin/
