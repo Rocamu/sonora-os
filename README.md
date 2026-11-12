@@ -6,7 +6,7 @@ El sistema combina Debian 13, Lyrion Music Server 9.1.1, Squeezelite, ALSA, Mate
 
 ## Descargas
 
-[Imagen, SHA-256 y guía de instalación en Google Drive](https://drive.google.com/drive/folders/15KFt2aeeiXA5gwjzyuEgbjaQibcRhRVy). La imagen de disco se distribuye por separado del código.
+[Imagen, SHA-256 y guía de instalación en Google Drive](https://drive.google.com/drive/folders/15KFt2aeeiXA5gwjzyuEgbjaQibcRhRVy). La imagen de disco se distribuye por separado del código. La descarga se ofrece en cinco partes; descarga también `parts-manifest.json` y `reunir-imagen.py`, colócalos en la misma carpeta y ejecuta `python3 reunir-imagen.py` para obtener el archivo `.img.xz` con SHA-256 verificado. Consulta `DESCARGAR-IMAGEN.txt`.
 
 ## Empezar
 

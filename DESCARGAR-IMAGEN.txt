@@ -1,0 +1,31 @@
+SONORA OS 0.1.0 — DESCARGA E INSTALACIÓN
+
+Esta entrega contiene una imagen Linux x86_64 de 4 GiB, comprimida con XZ.
+Se publica en cinco partes. Deben reunirse antes de grabarla en USB o SSD.
+No grabes las partes por separado.
+
+1. Descarga los cinco archivos que terminan en .part01 a .part05,
+   parts-manifest.json y reunir-imagen.py. Ponlos en una misma carpeta.
+   Si Drive entrega un ZIP al descargar varios archivos, extráelo primero.
+2. Abre Terminal en esa carpeta y ejecuta:
+      python3 reunir-imagen.py
+   En Windows con Python instalado:
+      py reunir-imagen.py
+3. El programa verifica cada parte, reúne los bytes y verifica el SHA-256
+   final. Crea sonora-os-0.1.0-amd64.img.xz (468.158.140 bytes).
+   Conserva las partes hasta verificar que la imagen se ha creado bien.
+4. Graba la imagen .img.xz en una unidad USB o SSD de al menos 8 GB con una
+   herramienta de grabación que admita XZ, o descomprímela antes a .img.
+   La grabación reemplaza el contenido del dispositivo que selecciones.
+5. Arranca el mini PC desde esa unidad, con Ethernet y el DAC USB conectados.
+   La pantalla del primer arranque muestra la contraseña única del equipo.
+   Desde un teléfono u ordenador de la misma red abre http://sonora.local/.
+
+SHA-256 de la imagen comprimida reunida:
+c7d62e894882ad0d7e0514424b1dd0751eb0fa79a3573256a7326c7f7a849b3f
+
+Código, guía completa y requisitos:
+https://github.com/Rocamu/sonora-os
+
+Esta versión requiere comprobación en el DAC y equipo concretos. El acceso
+a TIDAL y Qobuz requiere las cuentas compatibles del usuario y los plugins.

@@ -1,0 +1,32 @@
+{
+  "file": "sonora-os-0.1.0-amd64.img.xz",
+  "size": 468158140,
+  "sha256": "c7d62e894882ad0d7e0514424b1dd0751eb0fa79a3573256a7326c7f7a849b3f",
+  "parts": [
+    {
+      "name": "sonora-os-0.1.0-amd64.img.xz.part01",
+      "size": 94371840,
+      "sha256": "1dbd6bd4162dc266dee7cb93ee72840cc6c74017dda7aa23a41f4c55536c7005"
+    },
+    {
+      "name": "sonora-os-0.1.0-amd64.img.xz.part02",
+      "size": 94371840,
+      "sha256": "106e300426ac97db85c54a146647b101362dadcdb086e0d27115e21f30bef06f"
+    },
+    {
+      "name": "sonora-os-0.1.0-amd64.img.xz.part03",
+      "size": 94371840,
+      "sha256": "075f09dc309e7d02426ba52cc35f3f61f7b61700304a6d4f519ad683091c6a8c"
+    },
+    {
+      "name": "sonora-os-0.1.0-amd64.img.xz.part04",
+      "size": 94371840,
+      "sha256": "a87e80e507dd02b8fb9d67a2b7402cced0a7eef0ddbad6d51d999690027bdf0f"
+    },
+    {
+      "name": "sonora-os-0.1.0-amd64.img.xz.part05",
+      "size": 90670780,
+      "sha256": "e7017a938f4f1e38fd2a71371592ac8a153cc2dfc683a23ae4079c3c36ca0a13"
+    }
+  ]
+}
